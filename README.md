@@ -24,3 +24,14 @@ SqlKata Kütüphanesi baz alınarak üstüne geliştirildi.
 		<ConnectionSettings type="MySql" connection="Server=localhost;Database=sqlkata_example;Uid=root;Pwd=;" />
 	</ModelQueryBuilderSettings>
 
+
+TOperation Class Example
+
+    public class AuthorOperations : ModelOperations<Author>
+    {
+        public AuthorOperations() : base()
+        {
+
+        }
+    }
+
