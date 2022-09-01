@@ -48,7 +48,6 @@
     <Compile Include="Extensions\ConnectionSettingsExtensions.cs" />
     <Compile Include="Extensions\IDbConnectionExtensions.cs" />
     <Compile Include="Interfaces\IModelOperations.cs" />
-    <Compile Include="Interfaces\IModelQueryBuilder.cs" />
     <Compile Include="ModelOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

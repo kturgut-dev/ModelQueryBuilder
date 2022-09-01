@@ -18,6 +18,7 @@ namespace ModelQueryBuilder
         public IDbConnection DBCconnection { get; set; }
         public Compiler QueryCompiler { get; set; }
         public string TableName { get; set; }
+        public QueryFactory QueryFactoryDb { get; set; }
 
         public ModelOperations()
         {
@@ -59,13 +60,28 @@ namespace ModelQueryBuilder
         }
 
         #region Operation Methods
+        public Query CreateQuery()
+        {
+            try
+            {
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
+                {
+                    return QueryFactoryDb.Query(TableName);
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public bool Insert(T data)
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return db.Query(TableName)
+                    return QueryFactoryDb.Query(TableName)
                         .Insert(data) > 0;
                 }
             }
@@ -78,9 +94,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return await db.Query(TableName)
+                    return await QueryFactoryDb.Query(TableName)
                         .InsertAsync(data) > 0;
                 }
             }
@@ -94,9 +110,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return db.Query(TableName).InsertGetId<TId>(data);
+                    return QueryFactoryDb.Query(TableName).InsertGetId<TId>(data);
                 }
             }
             catch (Exception ex)
@@ -108,9 +124,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return await db.Query(TableName).InsertGetIdAsync<TId>(data);
+                    return await QueryFactoryDb.Query(TableName).InsertGetIdAsync<TId>(data);
                 }
             }
             catch (Exception ex)
@@ -123,9 +139,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return query(db.Query(TableName))
+                    return query(QueryFactoryDb.Query(TableName))
                         .Update(data) > 0;
                 }
             }
@@ -138,9 +154,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return await conditions(db.Query(TableName))
+                    return await conditions(QueryFactoryDb.Query(TableName))
                         .UpdateAsync(data) > 0;
                 }
             }
@@ -154,9 +170,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return query(db.Query(TableName))
+                    return query(QueryFactoryDb.Query(TableName))
                         .Delete() > 0;
                 }
             }
@@ -169,9 +185,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return await conditions(db.Query(TableName))
+                    return await conditions(QueryFactoryDb.Query(TableName))
                         .DeleteAsync() > 0;
                 }
             }
@@ -185,9 +201,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return (conditions != null ? conditions(db.Query(TableName)).Get<T>() : db.Query(TableName).Get<T>());
+                    return (conditions != null ? conditions(QueryFactoryDb.Query(TableName)).Get<T>() : QueryFactoryDb.Query(TableName).Get<T>());
                 }
             }
             catch (Exception ex)
@@ -199,9 +215,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return await (conditions != null ? conditions(db.Query(TableName)).GetAsync<T>() : db.Query(TableName).GetAsync<T>());
+                    return await (conditions != null ? conditions(QueryFactoryDb.Query(TableName)).GetAsync<T>() : QueryFactoryDb.Query(TableName).GetAsync<T>());
                 }
             }
             catch (Exception ex)
@@ -214,9 +230,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return conditions(db.Query(TableName)).First<T>();
+                    return conditions(QueryFactoryDb.Query(TableName)).First<T>();
                 }
             }
             catch (Exception ex)
@@ -228,9 +244,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return await conditions(db.Query(TableName)).FirstAsync<T>();
+                    return await conditions(QueryFactoryDb.Query(TableName)).FirstAsync<T>();
                 }
             }
             catch (Exception ex)
@@ -243,9 +259,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return query(db.Query(TableName)).Paginate<T>(page, perPage);
+                    return query(QueryFactoryDb.Query(TableName)).Paginate<T>(page, perPage);
                 }
             }
             catch (Exception ex)
@@ -257,9 +273,9 @@ namespace ModelQueryBuilder
         {
             try
             {
-                using (QueryFactory db = new QueryFactory(DBCconnection, QueryCompiler))
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
                 {
-                    return await conditions(db.Query(TableName)).PaginateAsync<T>(page, perPage);
+                    return await conditions(QueryFactoryDb.Query(TableName)).PaginateAsync<T>(page, perPage);
                 }
             }
             catch (Exception ex)

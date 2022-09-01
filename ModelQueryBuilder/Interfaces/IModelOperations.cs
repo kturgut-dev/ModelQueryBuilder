@@ -11,6 +11,8 @@ namespace ModelQueryBuilder.Interfaces
         SqlKata.Compilers.Compiler QueryCompiler { get; set; }
         string TableName { get; set; }
 
+        Query CreateQuery();
+
         bool Insert(T data);
         Task<bool> InsertAsync(T data);
 
