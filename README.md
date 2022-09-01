@@ -25,7 +25,7 @@ SqlKata Kütüphanesi baz alınarak üstüne geliştirildi.
 	</ModelQueryBuilderSettings>
 
 
-TOperation Class Example
+**TOperation Class Example**
 
     public class AuthorOperations : ModelOperations<Author>
     {
