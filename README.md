@@ -19,7 +19,7 @@ AuthorOperations authorOp = new AuthorOperations();
 
 Config File
 <code>
-<configSections>
+	<configSections>
 		<section name="ModelQueryBuilderSettings" type="ModelQueryBuilder.Configurations.ModelQueryBuilderSettings, ModelQueryBuilder"/>
 	</configSections>
 
