@@ -31,6 +31,18 @@ namespace ModelQueryBuilder
             TableName = TableNameAttributeParser.GetTableName<T>();
         }
 
+        //for encrypted relationships
+        public ModelOperations(string connectionString)
+        {
+            ModelQueryBuilderSettings modelQueryBuilderSettings = ModelQueryBuilderSettings.GetInstance();
+            if (modelQueryBuilderSettings == null)
+                throw new Exception("Configuration Setting undefined.");
+
+            DBCconnection = modelQueryBuilderSettings.ConnectionSettings.GetConnection(connectionString);
+            QueryCompiler = modelQueryBuilderSettings.ConnectionSettings.GetCompiler();
+            TableName = TableNameAttributeParser.GetTableName<T>();
+        }
+
         public ModelOperations(IDbConnection connection)
         {
             DBCconnection = connection;

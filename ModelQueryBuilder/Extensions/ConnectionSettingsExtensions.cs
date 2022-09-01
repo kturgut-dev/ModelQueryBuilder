@@ -26,16 +26,17 @@ namespace ModelQueryBuilder.Extensions
             }
         }
 
-        public static System.Data.IDbConnection GetConnection(this ConnectionSettings data)
+        public static System.Data.IDbConnection GetConnection(this ConnectionSettings data, string conString = null)
         {
+           string tempCon = string.IsNullOrEmpty(conString) ? data.Connection : conString;
             switch (data.Type)
             {
                 case "MySql":
-                    return new MySql.Data.MySqlClient.MySqlConnection(data.Connection);
+                    return new MySql.Data.MySqlClient.MySqlConnection(tempCon);
                 case "Sqlite":
-                    return new Microsoft.Data.Sqlite.SqliteConnection(data.Connection);
+                    return new Microsoft.Data.Sqlite.SqliteConnection(tempCon);
                 case "SqlServer":
-                    return new System.Data.SqlClient.SqlConnection(data.Connection);
+                    return new System.Data.SqlClient.SqlConnection(tempCon);
                 default:
                     throw new Exception("Bağlantı tipi bulunamadı.");
             }
