@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelQueryBuilder", "ModelQ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelQueryBuilder.Test", "ModelQueryBuilder.Test\ModelQueryBuilder.Test.csproj", "{9376926D-5010-44B9-8BE8-7C2865F4B5E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelQueryBuilder.NetCore", "ModelQueryBuilder.NetCore\ModelQueryBuilder.NetCore.csproj", "{2159DA99-6755-4F48-A8A2-C34EE07C90C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9376926D-5010-44B9-8BE8-7C2865F4B5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9376926D-5010-44B9-8BE8-7C2865F4B5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9376926D-5010-44B9-8BE8-7C2865F4B5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2159DA99-6755-4F48-A8A2-C34EE07C90C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2159DA99-6755-4F48-A8A2-C34EE07C90C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2159DA99-6755-4F48-A8A2-C34EE07C90C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2159DA99-6755-4F48-A8A2-C34EE07C90C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

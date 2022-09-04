@@ -15,6 +15,7 @@ namespace ModelQueryBuilder.Test
             AuthorOperations authorOp = new AuthorOperations();
             //IEnumerable<Author> authors = await authorOp.GetAllAsync();
             IEnumerable<Author> authorsTest = await authorOp.CreateQuery()
+                .WhereLike("FullName", "K%")
                 .GetAsync<Author>();
 
             foreach (Author author in authorsTest)

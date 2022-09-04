@@ -22,9 +22,6 @@ namespace ModelQueryBuilder.Interfaces
         bool Update(T data, Func<Query, Query> conditions);
         Task<bool> UpdateAsync(T data, Func<Query, Query> conditions);
 
-        bool Update(object data, Func<Query, Query> conditions);
-        Task<bool> UpdateAsync(object data, Func<Query, Query> conditions);
-
         bool Delete(Func<Query, Query> conditions);
         Task<bool> DeleteAsync(Func<Query, Query> conditions);
 

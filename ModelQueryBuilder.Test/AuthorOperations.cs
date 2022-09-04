@@ -10,7 +10,7 @@ namespace ModelQueryBuilder.Test
 {
     public class AuthorOperations : ModelOperations<Author>
     {
-        public AuthorOperations() : base("Server=localhost;Database=sqlkata_example;Uid=root;Pwd=;")
+        public AuthorOperations() : base()
         {
 
         }
