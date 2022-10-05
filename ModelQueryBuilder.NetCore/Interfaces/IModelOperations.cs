@@ -12,6 +12,7 @@ namespace ModelQueryBuilder.Interfaces
         string TableName { get; set; }
 
         Query CreateQuery();
+        T ExecuteQuery(Query query);
 
         bool Insert(T data);
         Task<bool> InsertAsync(T data);
@@ -21,6 +22,9 @@ namespace ModelQueryBuilder.Interfaces
 
         bool Update(T data, Func<Query, Query> conditions);
         Task<bool> UpdateAsync(T data, Func<Query, Query> conditions);
+
+        bool Update(object data, Func<Query, Query> conditions);
+        Task<bool> UpdateAsync(object data, Func<Query, Query> conditions);
 
         bool Delete(Func<Query, Query> conditions);
         Task<bool> DeleteAsync(Func<Query, Query> conditions);

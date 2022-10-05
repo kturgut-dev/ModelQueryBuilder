@@ -30,6 +30,21 @@ namespace ModelQueryBuilder
             }
         }
 
+        public T ExecuteQuery(Query)
+        {
+            try
+            {
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
+                {
+                    return QueryFactoryDb.Query(TableName);
+                }
+            }
+            catch (Exception ex)
+            {
+                return default(T);
+            }
+        }
+
         public bool Insert(T data)
         {
             try
@@ -106,6 +121,37 @@ namespace ModelQueryBuilder
             }
         }
         public async Task<bool> UpdateAsync(T data, Func<Query, Query> conditions)
+        {
+            try
+            {
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
+                {
+                    return await conditions(QueryFactoryDb.Query(TableName))
+                        .UpdateAsync(data) > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool Update(object data, Func<Query, Query> query)
+        {
+            try
+            {
+                using (QueryFactoryDb = new QueryFactory(DBCconnection, QueryCompiler))
+                {
+                    return query(QueryFactoryDb.Query(TableName))
+                        .Update(data) > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> UpdateAsync(object data, Func<Query, Query> conditions)
         {
             try
             {
